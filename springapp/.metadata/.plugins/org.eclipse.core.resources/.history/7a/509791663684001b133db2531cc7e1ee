@@ -1,0 +1,79 @@
+package com.wuwei.service;
+
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
+import org.springframework.stereotype.Service;
+import com.wuwei.dao.UserHibernet;
+import com.wuwei.entity.Result;
+import com.wuwei.entity.User;
+
+@Service
+public class UserHibernatService {
+
+	@Resource(name = "UserHibernet")
+	private UserHibernet userHibernet;
+	private static final Logger logger = Logger.getLogger(UserHibernatService.class.getName());
+
+	public Result updateUser(User user) {
+		Result result = new Result();
+		try {
+			result.setStatus(userHibernet.update(user));
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, null, e);
+		}
+		return result;
+	}
+
+	public Result createUser(User user) {
+		Result result = new Result();
+		try {
+			result.setStatus(userHibernet.create(user));
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, null, e);
+		}
+		return result;
+	}
+
+	public Result getUser(String name, String password) {
+		Result result = new Result();
+		System.out.println("user: " + name + " password: " + password);
+		try {
+			@SuppressWarnings("unchecked")
+			List<User> user = (List<User>) userHibernet.get(name);
+			if (user == null)
+				result.setStatus(0);
+			else
+				result.setStatus(1);
+			result.setData(user);
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, null, e);
+		}
+		return result;
+	}
+
+	public Result getUser() {
+		Result result = new Result();
+		try {
+			List<Object> user = userHibernet.getAll();
+			result.setStatus(1);
+			result.setData(user);
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, null, e);
+		}
+		return result;
+	}
+
+	public Result deleteUser(String email, String password) {
+		Result result = new Result();
+		try {
+
+			result.setStatus(userHibernet.delete(email));
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, null, e);
+		}
+		return result;
+	}
+
+}

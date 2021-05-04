@@ -1,0 +1,22 @@
+package com.wuwei.dao;
+
+import java.util.List;
+
+import org.hibernate.Query;
+
+import com.wuwei.entity.Option;
+
+public interface IHibernate {
+	int update(Object object);
+
+	int create(Object object);
+
+	List<Object> getAll();
+
+	Object getByName(String Name);
+
+	Object getById(String Id);
+
+
+	int delete(String option);
+}

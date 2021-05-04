@@ -1,0 +1,62 @@
+package com.wuwei.controller;
+
+import javax.annotation.Resource;
+import org.springframework.web.bind.annotation.*;
+import com.wuwei.entity.Result;
+import com.wuwei.entity.User;
+import com.wuwei.service.UserHibernatService;
+
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/user")
+public class UserController {
+
+	@Resource
+	private UserHibernatService hservice;
+
+	@DeleteMapping("/")
+	public Result deleteUser(@RequestParam String email) {
+
+		System.out.println("DeleteUser controllerr");	
+		return hservice.deleteUser(email);
+	}
+
+	@DeleteMapping("/all")
+	public Result deleteAllUsers() {
+
+		System.out.println("DeleteUser controllerr");	
+		return hservice.deleteAllUsers();
+	}
+	
+	@PostMapping("/")
+	public Result createUser(@RequestBody User user) {
+
+		System.out.println("postUser controllerr");
+			return hservice.createUser(user);
+		
+	}
+	
+	@PutMapping("/")
+	public Result updateUser(@RequestBody User user) {
+		System.out.println("postUser controllerr");
+return hservice.updateUser(user);
+	}
+	
+	@PostMapping("/")
+	public Result getUserByName(@RequestParam String email, @RequestBody String password) {
+		System.out.println("getUser controllerr");
+		return hservice.getUserByName(email, password);
+	}
+	
+	@PostMapping("/")
+	public Result getUserById(@RequestParam int id) {
+		System.out.println("getUser controllerr");
+		return hservice.getUserById(id);
+	}
+	
+	@GetMapping("/All")
+	public Result getUser() {
+		System.out.println("GetAllUsers controllerr");
+		return hservice.getAllUsers();
+	}
+}

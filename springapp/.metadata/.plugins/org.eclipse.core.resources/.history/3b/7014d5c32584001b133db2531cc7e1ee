@@ -1,0 +1,60 @@
+package com.wuwei.controller;
+
+
+import javax.annotation.Resource;
+import org.springframework.web.bind.annotation.*;
+
+import com.wuwei.entity.Result;
+import com.wuwei.entity.Option;
+import com.wuwei.service.OptionsService;
+
+
+	
+
+
+	@RestController
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping("/option")
+	public class OptionController {
+
+		@Resource
+		private OptionsService service;
+
+		@DeleteMapping("/delete")
+		public Result postOption(@RequestParam String option) {
+
+			System.out.println("Deleteoption controllerr");	
+			return service.deleteOption(option);
+		}
+
+
+		@PostMapping("/postOption")
+		public Result postoption(@RequestParam Boolean isNew, @RequestBody String optionName) {
+			System.out.println("postoption controllerr");	
+			if(isNew)
+				return service.createOption(optionName);
+			return service.updateOption(optionName);
+		}
+
+		
+		@PostMapping("")
+		public Result getOption(@RequestParam String option) {
+			System.out.println("getoption controllerr");
+			return service.getOption(option);
+		}
+		
+		@GetMapping("/getAll")
+		public Result getOptions() {
+			System.out.println("GetAlloptions controllerr");
+			return service.getOptions();
+		}
+		
+		@PostMapping("/createMany")
+		public Result createOptions(@RequestBody String[] optionsName) {
+			System.out.println("createOptions controllerr");
+			return service.createOptions();
+		}	
+		
+	}
+
+

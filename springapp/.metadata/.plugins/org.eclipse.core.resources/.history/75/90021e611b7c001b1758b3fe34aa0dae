@@ -1,0 +1,55 @@
+package com.wuwei.controller;
+
+import javax.annotation.Resource;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.wuwei.entity.Result;
+import com.wuwei.entity.Value;
+import com.wuwei.service.ValuesHibernatService;
+
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/values")
+public class ValuesController {
+
+	@Resource
+	private ValuesHibernatService hservice;
+
+	@DeleteMapping("/deleteValues")
+	public Result postValues(@RequestParam String email, @RequestBody String password) {
+
+		System.out.println("DeleteValues controllerr");	
+		return hservice.deleteValues(email, password);
+	}
+
+
+	@PostMapping("/postValues")
+	public Result postValues(@RequestParam Boolean isNew, @RequestBody Object value) {
+		System.out.println("postValues controllerr");
+//		System.out.println("ValuesIp:"+values.getiPAddress());		
+//		if(isNew)
+			return hservice.createValues(value);
+//		return hservice.updateValues(value);
+	}
+
+	
+	@PostMapping("/GetValues")
+	public Result getValues(@RequestParam String email, @RequestBody String password) {
+		System.out.println("getValues controllerr");
+		return hservice.getValues(email, password);
+	}
+	
+	@GetMapping("/GetAllValuess")
+	public Result getValues() {
+		System.out.println("GetAllValuess controllerr");
+		return hservice.getValues();
+	}
+}

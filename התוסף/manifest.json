@@ -1,0 +1,23 @@
+{
+
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "myI.png",
+    "default_popup": "popup.html"},
+  "name": "Click here to see more options to your extention",
+  "version": "0.1.1",
+  "permissions": [ "tabs", "activeTab", "downloads"],
+  "description": "Lateral blog post demo extension",
+  "background": {
+    "scripts": ["jquery-3.2.1.min.js", "index.js"]
+},
+
+  "content_scripts": [{
+
+    "css": ["styles.css","index.css"],
+    "js": ["jquery-3.2.1.min.js","content.js"],
+   
+    "matches": ["http://*/*","https://*/*"]
+    }]
+ 
+}

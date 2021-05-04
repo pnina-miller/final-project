@@ -1,0 +1,124 @@
+package com.wuwei.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Entity;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
+import com.wuwei.util.HibernateUtil;
+import com.wuwei.entity.Result;
+import com.wuwei.entity.User;
+
+@Repository("UserHibernet")
+public class UserHibernet implements IHibernate {
+
+	static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	static Session session = sessionFactory.openSession();
+
+	@Override
+	public int update(Object object) {
+
+//		System.out.println("updateUser dao  userName" + ((User) object).getFirstName() + " " + ((User) object).getLastName());
+		session = session.getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			session.update(object);
+			System.out.println("postUser dao succeed");
+			tx.commit();
+			return 1;
+		} catch (Exception ex) {
+			return 0;
+		} finally {
+			session.close();
+		}
+
+	}
+
+	@Override
+	public int create(Object user) {
+//		System.out.println("createUser dao  userName " + ((User) user).getFirstName() + " " + ((User) user).getLastName());
+		session = session.getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			session.save(user);
+			System.out.println("createUser dao succeed");
+			tx.commit();
+			return 1;
+		} catch (Exception ex) {
+			System.out.println(ex);
+			return 0;
+		} finally {
+			session.close();
+		}
+
+	}
+
+	
+	public Object get(String email) {
+		String hql = "FROM User u where u.email= :email";
+		session = session.getSessionFactory().openSession();
+		Query query = session.createQuery(hql);
+		query.setParameter("email", email);
+		@SuppressWarnings("unchecked")
+		List<User> results = query.list();
+
+		// User user = (User) session.get(User.class, Integer.valueOf(1));// passing id
+		// of user
+		System.out.println("Get " + results + " וuser succeeded!");
+
+		//if (results.get(0).getPassword().equals(password))
+			return results;
+		//return null;
+	}
+
+	@Override
+	public List<Object> getAll() {
+		String hql = "FROM User u ";
+		session = session.getSessionFactory().openSession();
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Object> results = query.list();
+
+		// User user = (User) session.get(User.class, Integer.valueOf(1));// passing id
+		// of user
+		System.out.println("Get all וusers succeeded!");
+		session.close();
+		return results;
+	}
+
+	@Override
+	public int delete(String email) {
+		User user = (User) get(email);
+		session = session.getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			session.delete(user);
+			System.out.println("deleteUser dao succeed");
+			tx.commit();
+			return 1;
+		} catch (Exception ex) {
+			System.out.println(ex);
+			return 0;
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public Object getByName(String Name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getById(int Id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+}

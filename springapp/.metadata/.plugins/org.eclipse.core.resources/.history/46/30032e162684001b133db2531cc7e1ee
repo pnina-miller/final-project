@@ -1,0 +1,131 @@
+package com.wuwei.dao;
+
+
+import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
+import com.wuwei.util.HibernateUtil;
+import com.wuwei.entity.Option;
+
+@Repository("OptionsHibernet")
+public class OptionsHibernet implements IHibernate {
+
+	static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	static Session session = sessionFactory.openSession();
+	
+	@Override
+	public int create(Object object) {
+		System.out.println("createOption dao  Option:"+object);
+		session = session.getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			session.save(object);
+			System.out.println("createOption dao succeed");
+			tx.commit();
+			return 1;
+		} catch (Exception ex) {
+			System.out.println("error in createOption: "+ex);
+			return 0;
+		} finally {
+			session.close();
+		}
+
+	}
+
+	@Override
+	public Object get(String option) {
+		String hql = "FROM Option u where u.option= :option";
+		session = session.getSessionFactory().openSession();
+		Query query = session.createQuery(hql);
+		query.setParameter("option", option);
+		@SuppressWarnings("unchecked")
+		Object results = query.list();
+
+		// Option Option = (Option) session.get(Option.class, Integer.valueOf(1));// passing id
+		// of Option
+		System.out.println("Get " + results + " וOption succeeded!");
+
+		//if (results.get(0).getPassword().equals(password))
+			return results;
+		//return null;
+	}
+
+	@Override
+	public List<Object> getAll() {
+		String hql = "FROM Option u ";
+		session = session.getSessionFactory().openSession();
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Object> results = query.list();
+
+		// Option Option = (Option) session.get(Option.class, Integer.valueOf(1));// passing id
+		// of Option
+		System.out.println("Get all וOptions succeeded!");
+		session.close();
+		return results;
+	}
+
+	@Override
+	public int delete(String option) {
+		Option option1 = (Option) get(option);
+		session = session.getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			session.delete(option1);
+			System.out.println("deleteOption dao succeed");
+			tx.commit();
+			return 1;
+		} catch (Exception ex) {
+			System.out.println(ex);
+			return 0;
+		} finally {
+			session.close();
+		}
+	}
+
+	public int createOptions() {
+ String[] options={"",""};
+			System.out.println("createOptions dao  ");
+			session = session.getSessionFactory().openSession();
+			Transaction tx = session.beginTransaction();
+			try {
+				for (String op : options) {
+						Option newOption=new Option(op);
+				session.save(newOption);
+					}
+				System.out.println("createOption dao succeed");
+				tx.commit();
+				return 1;
+			} catch (Exception ex) {
+				System.out.println("error: "+ex);
+				return 0;
+			} finally {
+				session.close();
+			}
+
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public int update(Object option) {
+		// TODO Auto-generated method stub
+		System.out.println("updateOption dao");
+		session = session.getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			session.update(option);
+			System.out.println("postOption dao succeed");
+			tx.commit();
+			return 1;
+		} catch (Exception ex) {
+			return 0;
+		} finally {
+			session.close();
+		}
+	}
+
+
+}

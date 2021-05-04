@@ -1,0 +1,106 @@
+<form [formGroup]="detailsForm">
+
+
+
+        <!-- [Emai1l, password2, IdentityNum3, FirstName4, LastName5, BirthDate6, Gender7, Street8, HouseNum9, Enterance10,
+        Neighborhood11, PostalCode12, City13, Country14, AptNum15, Status16, CreditNum17, Csv18, Valid19, AptArea20,
+        RebuildNeighborhood21] -->
+        <div id=1 class="row container-fluid">
+                <!--*ngIf="isShown" </div>-->
+                <h2>Fill the details you interst that we will fill it automatically in your forms:</h2>
+                <fieldset>
+                        <legend>personal:</legend>
+                        <div>email address:
+                                <input placeholder="type here" formControlName="Email1" name="Email" id="Email"
+                                        value={{user.email}}>
+                        </div>
+                        <div >password:
+                                <input placeholder="type here" formControlName="password2" name="password" id="password"
+                                        value={{user.password}}>
+                        </div>
+                        <div>identity number:
+                                <input placeholder="type here" formControlName="IdentityNum3" name="identity_number"
+                                        id="identity_number"></div>
+                        <div>first name:
+                                <input placeholder="type here" formControlName="FirstName4" name="first_name"
+                                        id="first_name" value={{user.firstName}}></div>
+                        <div>last name: <input placeholder="type here" formControlName="LastName5" name="last_name"
+                                        id="last_name">
+                        </div>
+                        <div>birth date:
+                                <input type="date" formControlName="BirthDate6" name="birth_date" id="birth_date"
+                                        value={{user.birthDate}}>
+                        </div>
+                        <div>Gender:
+                                <label for="gender" formControlName="Gender7" >
+                                <input type="radio" id="male" name="gender" value="male">
+                                <label for="male">Male</label><br>
+                                <input type="radio" id="female" name="gender" value="female">
+                                <label for="female">Female</label><br>
+                        </label>
+                        </div>
+                </fieldset>
+                <fieldset>   
+                        <legend>address:</legend>
+                        <div>street name:
+                                <input placeholder="type here" formControlName="Street8" name="street_name"
+                                        id="street_name" value={{user.street}}>
+                        </div>
+                        <div>building number:
+                                <input placeholder="type here" formControlName="HouseNum9" name="building_number"
+                                        id="building_number" value={{user.houseNum}}>
+                        </div>
+                        <div>Enterance:
+                                <input placeholder="type here" formControlName="Enterance10" name="Enterance"
+                                        id="Enterance" value={{user.enterance}}>
+                        </div>
+                        <div>neighborhood name:
+                                <input placeholder="type here" formControlName="Neighborhood11" name="neighborhood_name"
+                                        id="neighborhood_name" value={{user.neighborhood}}>
+                        </div>
+                        <div>postal code:
+                                <input placeholder="type here" formControlName="PostalCode12" name="postal_code"
+                                        id="postal_code" value={{user.postalCode}}>
+                        </div>
+                        <div>city:
+                                <input placeholder="type here" formControlName="City13" name="city" id="city"
+                                        value={{user.city}}>
+                        </div>
+                        <div>country:
+                                <input placeholder="type here" formControlName="Country14" name="country" id="country"
+                                        value={{user.country}}>
+                        </div>
+                        <div>AptNum:
+                                <input placeholder="type here" formControlName="AptNum15" name="AptNum" id="AptNum"
+                                        value={{user.aptNum}}>
+                        </div>
+                        <div>AptArea:
+                                <input placeholder="type here" formControlName="AptArea20" name="AptArea" id="AptArea"
+                                        value={{user.aptArea}}>
+                        </div>
+                        <div>RebuildNeighborhood:
+                                <input placeholder="type here" formControlName="RebuildNeighborhood21"
+                                        name="RebuildNeighborhood" id="RebuildNeighborhood"
+                                        value={{user.rebuildNeighborhood}}>
+                        </div>
+                </fieldset>
+
+                <fieldset>
+                        <legend>credit card:</legend>
+                        <div>creditCard number:
+                                <input type="password" placeholder="type here" formControlName="CreditNum17"
+                                        name="creditCard_number" id="creditCard_number">
+                        </div>
+                        <div>csv:
+                                <input type="password" placeholder="type here" formControlName="Csv18" name="csv"
+                                        id="csv">
+                        </div>
+                        <div>validity date:
+                                <input type="date" formControlName="Valid19" name="Valid" id="Valid"
+                                        value={{user.valid}}>
+                        </div>
+                </fieldset>
+                <button (click)="saveDetails()">save details</button>
+        </div>
+
+</form>

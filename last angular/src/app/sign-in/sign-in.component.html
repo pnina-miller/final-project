@@ -1,0 +1,13 @@
+
+
+
+<div class="row container-fluid">
+    <form [formGroup]="detailsForm">
+    <div>email:<input placeholder="type here" formControlName="email" name="name" id="name"></div>
+    <div>password:<input  [type]="show_password ? 'text' : 'password'" placeholder="type here" formControlName="password" name="password" id="password">
+    
+                  <button (click)="showPassword()">Show/Hide password</button>
+    </div>
+</form>
+    <button (click)="signIn()">sign in</button>
+ </div>   

@@ -1,0 +1,34 @@
+<!-- <button (click)="toggleShow()" type="checkbox" >show/hide</button>
+
+<div *ngIf="isShown" class="row container-fluid"  id="divshow" >
+Div Content
+
+</div> -->
+<h1>Everything you want to know about EasyForm!!!!!!!!!!!!!</h1>
+<h2>Click the header you want to read</h2>
+<nav>
+    <ul><h3 (click)="open1()">Who can use EasyForm?</h3></ul>
+    <div id=1  *ngIf="isShown1" class="row container-fluid"  >
+        <li>Everyone!</li> 
+        <li>Aspeicially people that used to fill many forms all the time</li>
+        <li>You can use it to periods of time that you fill forms, for example:the beginning of the studies year</li></div>
+   
+        <ul><h3 (click)="open2()">Why is it good to use EasyForm?</h3></ul>
+        <div id=2  *ngIf="isShown2" class="row container-fluid">
+        <li>It's the <b>easiest</b> way to fill form</li> 
+        <li>It's the <b>best</b> way to fill form</li>
+        <li>It's the <b>convinient</b> way to fill form</li></div>
+       
+    <ul><h3 (click)="open3()">Why is it secure to use EasyForm?</h3></ul>
+     <div id=3  *ngIf="isShown3" class="row container-fluid">
+        <li>we use the https protocol instead of http</li> 
+        <li>All the data is saved in your computer and no one can see it beside of you</li></div>
+   
+        <ul><h3 (click)="open4()">How can I use EasyForm?</h3></ul>
+         <div id=4  *ngIf="isShown4" class="row container-fluid">
+        <li>Add this additive to your browser</li> 
+        <li>Insert your details</li>
+        <li>When you fill a form type your shortcut</li></div>
+        <li>Goog Luck😀😀😀</li>
+
+</nav>
